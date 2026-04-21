@@ -1,66 +1,44 @@
 const display = document.getElementById("display");
 
-document.querySelectorAll("button").forEach(button => {
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+
 button.addEventListener("click", () => {
 
-if (button.textContent === "C") {
-    display.value = "";
-} else if(button.textContent === "=") {
-    calculate();
-} else {
-    display.value += button.textContent;
+let value = button.textContent;
+
+if(value === "C"){
+display.value = "";
+}
+
+else if(value === "="){
+calculate();
+}
+
+else{
+display.value += value;
 }
 
 });
+
 });
 
-function add(a, b) {
-    return a + b;
-}
+function calculate(){
 
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-function calculate() {
+try {
 
 let expression = display.value;
 
-if (expression.includes("+")) {
+// potęgowanie ^
+expression = expression.replace(/\^/g, "**");
 
-    let numbers = expression.split("+");
-
-    display.value = add(
-    parseFloat(numbers[0]),
-    parseFloat(numbers[1])
-);
+display.value = eval(expression);
 
 }
-    else if (expression.includes("-")) {
-        let numbers = expression.split("-");
-        display.value = subtract(
-            parseFloat(numbers[0]),
-            parseFloat(numbers[1])
-        );
-    } else if (expression.includes("*")) {
-        let numbers = expression.split("*");
-        display.value = multiply(
-            parseFloat(numbers[0]),
-            parseFloat(numbers[1])
-        );
-    } else if (expression.includes("/")) {
-        let numbers = expression.split("/");
-        display.value = divide(
-            parseFloat(numbers[0]),
-            parseFloat(numbers[1])
-        );
-    }
+
+catch{
+display.value = "Error";
+}
+
 }
