@@ -22,6 +22,14 @@ function subtract(a, b) {
     return a - b;
 }
 
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
 function calculate() {
 
 let expression = display.value;
@@ -39,6 +47,18 @@ if (expression.includes("+")) {
     else if (expression.includes("-")) {
         let numbers = expression.split("-");
         display.value = subtract(
+            parseFloat(numbers[0]),
+            parseFloat(numbers[1])
+        );
+    } else if (expression.includes("*")) {
+        let numbers = expression.split("*");
+        display.value = multiply(
+            parseFloat(numbers[0]),
+            parseFloat(numbers[1])
+        );
+    } else if (expression.includes("/")) {
+        let numbers = expression.split("/");
+        display.value = divide(
             parseFloat(numbers[0]),
             parseFloat(numbers[1])
         );
